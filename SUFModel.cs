@@ -11,16 +11,15 @@ public class SUFModel : MonoBehaviour {
   [HideInInspector]
   public Vector3 previousTranslation;
 
-  private float smoothTime = 0.05f;
   private Vector3 translationVelocity = Vector3.zero;
   private Vector3 rotationVelocity = Vector3.zero;
 
   public void SUFUpdate(Vector3 translation, Vector3 rotation, Vector3 headRotation) {
-    translation = Vector3.SmoothDamp(previousTranslation, translation + translationOffset, ref translationVelocity, smoothTime);
+    translation = Vector3.SmoothDamp(previousTranslation, translation + translationOffset, ref translationVelocity, Time.deltaTime*2);
     previousTranslation = translation;
     Translate(translation);
 
-    rotation = Vector3.SmoothDamp(previousRotation, rotation, ref rotationVelocity, smoothTime);
+    rotation = Vector3.SmoothDamp(previousRotation, rotation, ref rotationVelocity, Time.deltaTime*2);
     previousRotation = rotation;
     Rotate(rotation, headRotation);
   }
